@@ -1,0 +1,47 @@
+{
+    "model": {
+        "type": "xgboost",
+        "model_filename": "crowd_predictor.pkl",
+        "scaler_filename": "crowd_scaler.pkl",
+        "comment": "Model saved under ai/lina/models/"
+    },
+    "features": {
+        "lag_windows": [1, 2, 3, 6],
+        "rolling_windows": [3, 6, 12],
+        "use_hour": true,
+        "use_minute": true,
+        "use_day_of_week": true,
+        "use_is_weekend": true,
+        "use_queue_length": true,
+        "comment": "Feature flags. Disable to reduce dimensionality for edge deployment."
+    },
+    "training": {
+        "test_size": 0.2,
+        "random_state": 42,
+        "xgboost_params": {
+            "n_estimators": 200,
+            "max_depth": 6,
+            "learning_rate": 0.05,
+            "subsample": 0.8,
+            "colsample_bytree": 0.8,
+            "reg_alpha": 0.1,
+            "reg_lambda": 1.0,
+            "random_state": 42
+        }
+    },
+    "prediction": {
+        "intervals_minutes": [15, 30, 60],
+        "steps_per_interval": {
+            "15": 3,
+            "30": 6,
+            "60": 12,
+            "comment": "Assuming 5-minute aggregation windows."
+        },
+        "min_history_records": 50,
+        "comment": "Minimum records required to make a prediction."
+    },
+    "data": {
+        "aggregation_interval_minutes": 5,
+        "comment": "Time window for aggregating raw tracking events into counts."
+    }
+}

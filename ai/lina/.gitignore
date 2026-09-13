@@ -1,0 +1,51 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Lina Module — .gitignore
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Trained model files (large binaries — regenerate with train_prediction_model.py)
+models/*.pkl
+models/*.json
+models/*.ubj
+
+# Runtime outputs (generated at runtime — not committed)
+outputs/json/*.json
+outputs/heatmaps/*.png
+outputs/heatmaps/*.jpg
+outputs/reports/*.log
+
+# Generated sample data (regenerate with generate_sample_data.py)
+data/generated/
+
+# Test coverage reports
+.coverage
+htmlcov/
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Keep directory structure placeholders
+!models/.gitkeep
+!outputs/json/.gitkeep
+!outputs/heatmaps/.gitkeep
+!outputs/reports/.gitkeep
+!data/generated/.gitkeep

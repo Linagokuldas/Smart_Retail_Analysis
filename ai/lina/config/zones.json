@@ -1,0 +1,86 @@
+{
+    "store_dimensions": {
+        "width": 1000,
+        "height": 800,
+        "unit": "pixels"
+    },
+    "zones": [
+        {
+            "id": "ZONE_A",
+            "name": "Grocery",
+            "type": "shopping",
+            "polygon": [[0, 0], [400, 0], [400, 300], [0, 300]],
+            "area_sqm": 120.0
+        },
+        {
+            "id": "ZONE_B",
+            "name": "Beverages",
+            "type": "shopping",
+            "polygon": [[400, 0], [800, 0], [800, 300], [400, 300]],
+            "area_sqm": 120.0
+        },
+        {
+            "id": "ZONE_C",
+            "name": "Snacks & Confectionery",
+            "type": "shopping",
+            "polygon": [[800, 0], [1000, 0], [1000, 300], [800, 300]],
+            "area_sqm": 60.0
+        },
+        {
+            "id": "ZONE_D",
+            "name": "Dairy & Frozen",
+            "type": "shopping",
+            "polygon": [[0, 300], [400, 300], [400, 600], [0, 600]],
+            "area_sqm": 120.0
+        },
+        {
+            "id": "ZONE_E",
+            "name": "Personal Care",
+            "type": "shopping",
+            "polygon": [[400, 300], [800, 300], [800, 600], [400, 600]],
+            "area_sqm": 120.0
+        },
+        {
+            "id": "BILLING",
+            "name": "Billing Area",
+            "type": "billing",
+            "polygon": [[0, 600], [1000, 600], [1000, 800], [0, 800]],
+            "area_sqm": 80.0
+        },
+        {
+            "id": "ENTRY",
+            "name": "Entry / Exit",
+            "type": "transit",
+            "polygon": [[800, 300], [1000, 300], [1000, 600], [800, 600]],
+            "area_sqm": 40.0
+        }
+    ],
+    "queue_regions": [
+        {
+            "id": "QUEUE_COUNTER_1",
+            "name": "Counter 1 Queue",
+            "counter_id": "COUNTER_1",
+            "polygon": [[0, 620], [200, 620], [200, 800], [0, 800]],
+            "max_capacity": 10
+        },
+        {
+            "id": "QUEUE_COUNTER_2",
+            "name": "Counter 2 Queue",
+            "counter_id": "COUNTER_2",
+            "polygon": [[220, 620], [440, 620], [440, 800], [220, 800]],
+            "max_capacity": 10
+        },
+        {
+            "id": "QUEUE_COUNTER_3",
+            "name": "Counter 3 Queue",
+            "counter_id": "COUNTER_3",
+            "polygon": [[460, 620], [680, 620], [680, 800], [460, 800]],
+            "max_capacity": 10
+        }
+    ],
+    "billing_counters": [
+        {"id": "COUNTER_1", "name": "Counter 1", "queue_region_id": "QUEUE_COUNTER_1"},
+        {"id": "COUNTER_2", "name": "Counter 2", "queue_region_id": "QUEUE_COUNTER_2"},
+        {"id": "COUNTER_3", "name": "Counter 3", "queue_region_id": "QUEUE_COUNTER_3"}
+    ]
+}

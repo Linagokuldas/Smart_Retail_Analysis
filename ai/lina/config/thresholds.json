@@ -1,0 +1,39 @@
+{
+    "crowd": {
+        "density_low": 0.10,
+        "density_medium": 0.30,
+        "density_high": 0.60,
+        "density_critical": 0.80,
+        "comment": "Density thresholds as people_per_sqm normalized fraction. Adjust for actual store capacity."
+    },
+    "queue": {
+        "min_people_to_form_queue": 3,
+        "queue_congestion_length": 7,
+        "queue_overloaded_length": 12,
+        "grace_period_seconds": 10,
+        "comment": "Grace period prevents flickering when a person temporarily leaves camera view."
+    },
+    "waiting_time": {
+        "busy_threshold_seconds": 120,
+        "critical_threshold_seconds": 300,
+        "comment": "Thresholds for waiting time classification in seconds."
+    },
+    "counter": {
+        "busy_queue_length": 5,
+        "overloaded_queue_length": 10,
+        "busy_avg_wait_seconds": 120,
+        "overloaded_avg_wait_seconds": 240,
+        "comment": "Thresholds for NORMAL/BUSY/OVERLOADED counter status."
+    },
+    "peak_hours": {
+        "high_traffic_percentile": 75,
+        "very_high_traffic_percentile": 90,
+        "comment": "Percentile thresholds for classifying peak traffic periods."
+    },
+    "recommendations": {
+        "open_counter_queue_length": 7,
+        "staff_allocation_density": 0.60,
+        "predicted_crowd_warning_ratio": 0.80,
+        "comment": "Triggers for generating actionable recommendations."
+    }
+}
