@@ -108,7 +108,11 @@ def get_feature_columns(df: pd.DataFrame) -> list[str]:
     return result
 
 
-def prepare_latest_features(df: pd.DataFrame, config: dict) -> Optional[pd.Series]:
+def prepare_latest_features(
+    df: pd.DataFrame,
+    config: dict,
+    expected_columns: Optional[list] = None,
+) -> Optional[pd.Series]:
     """
     Build a single feature row from the latest available data
     (for real-time prediction).
@@ -116,6 +120,9 @@ def prepare_latest_features(df: pd.DataFrame, config: dict) -> Optional[pd.Serie
     Args:
         df: Historical DataFrame (recent records).
         config: Loaded prediction_config.json.
+        expected_columns: If provided, the output Series will be reindexed to
+            exactly match these column names (filling any missing with 0.0).
+            Pass the feature_columns list saved at training time.
 
     Returns:
         Feature Series for the next time step, or None if insufficient data.
@@ -136,7 +143,9 @@ def prepare_latest_features(df: pd.DataFrame, config: dict) -> Optional[pd.Serie
     df = df.sort_values("timestamp").reset_index(drop=True)
 
     last = df.iloc[-1]
-    next_ts = last["timestamp"] + pd.Timedelta(minutes=config.get("data", {}).get("aggregation_interval_minutes", 5))
+    next_ts = last["timestamp"] + pd.Timedelta(
+        minutes=config.get("data", {}).get("aggregation_interval_minutes", 5)
+    )
 
     row = {}
 
@@ -164,4 +173,10 @@ def prepare_latest_features(df: pd.DataFrame, config: dict) -> Optional[pd.Serie
     if feature_cfg.get("use_queue_length", True) and "queue_length" in df.columns:
         row["recent_queue_length"] = float(df["queue_length"].iloc[-1])
 
-    return pd.Series(row)
+    series = pd.Series(row)
+
+    # Align to training feature columns if provided
+    if expected_columns:
+        series = series.reindex(expected_columns, fill_value=0.0)
+
+    return series

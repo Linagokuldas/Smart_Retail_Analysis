@@ -13,8 +13,9 @@ scipy>=1.10.0
 scikit-learn>=1.3.0
 xgboost>=2.0.0
 
-# Computer Vision (for heatmap generation)
+# Computer Vision (for heatmap generation + live camera)
 opencv-python>=4.8.0
+ultralytics>=8.0.0      # YOLOv8 — for live camera detection
 
 # Configuration & utilities
 PyYAML>=6.0

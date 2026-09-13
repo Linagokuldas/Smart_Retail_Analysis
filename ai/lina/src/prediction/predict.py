@@ -72,7 +72,9 @@ class CrowdPredictor:
             if not loaded:
                 return self._empty_prediction()
 
-        feature_row = prepare_latest_features(historical_df, self.config)
+        feature_row = prepare_latest_features(
+            historical_df, self.config, expected_columns=self._feature_cols
+        )
         if feature_row is None:
             logger.warning("Cannot generate predictions — insufficient history")
             return self._empty_prediction()
@@ -83,9 +85,11 @@ class CrowdPredictor:
             "model_available": True,
         }
 
-        # Align feature row to trained feature columns
+        # Always reindex to exactly match the columns the scaler was fitted on
         if self._feature_cols:
             feature_row = feature_row.reindex(self._feature_cols, fill_value=0.0)
+            if feature_row.isnull().any():
+                feature_row = feature_row.fillna(0.0)
 
         X = feature_row.values.reshape(1, -1)
         try:
